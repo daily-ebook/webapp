@@ -34,9 +34,11 @@ def status(task_id):
     response = generate_response_from_task(task)
     return jsonify(response)
 
-"""@api.route('/sources')
+@api.route('/sources')
 def sources():
-    return jsonify({ "sources": ded.sources_metadata })"""
+    task = celery.send_task('tasks.get_sources_metadata')
+    response = task.get()
+    return jsonify(response)
 
 @api.app_errorhandler(404)
 def error404(e):
