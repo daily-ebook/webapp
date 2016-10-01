@@ -1,0 +1,11 @@
+(% extends "layout/base.html" %)
+
+(% block content %)
+    <h1>Available Sources</h1>
+    <div id="ractive-list-sources"></div>
+(% endblock %)
+
+(% block scripts %)
+    (% include "ractive/list-sources.html" %)
+    <script src="(( url_for('frontend.static', filename='js/list-sources.js') ))"></script>
+(% endblock %)

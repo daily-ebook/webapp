@@ -1,0 +1,12 @@
+(% extends "layout/base.html" %)
+(% set title="Create recipe" %)
+
+(% block content %)
+<h1>Create recipe</h1>
+<div id="ractive-create-recipe"></div>
+(% endblock %)
+
+(% block scripts %)
+    (% include "ractive/create-recipe.html" %)
+    <script src="(( url_for('frontend.static', filename='js/create-recipe.js') ))"></script>
+(% endblock %)

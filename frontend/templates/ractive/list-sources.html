@@ -1,0 +1,15 @@
+<script id='template-list-sources' type='text/ractive'>
+    <ul class="list-group sources">
+        {{ #each sources }}
+            <div href="#" class="list-group-item source">
+                <h5 class="list-group-item-heading">{{ display_name }}</h5>
+                <div class="list-group-item-text">
+                    <div>{{ description }} <a data-toggle="collapse" href="#{{ name }}-details">Fields...</a></div>
+                    <div class="collapse" id="{{ name }}-details">
+                        {{ description }}
+                    </div>
+                </div>
+            </div>
+        {{ /each }}
+    </ul>
+</script>

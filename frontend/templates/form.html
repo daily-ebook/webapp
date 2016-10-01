@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Form</title>
+    <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+
+</head>
+<body>
+    <div id="container">
+    </div>
+    <form method="POST" action="[[ url_for('api.generate') ]]">
+        <textarea name="config"></textarea>
+        <input type="Submit" value="Send task"/>
+    </form>
+
+    <script id='sources' type='text/ractive'>
+        <h1>Sources</h1>
+        <p>[[sources]]</p>
+    </script>
+    <script>
+        var ractive = new Ractive({
+          // The `el` option can be a node, an ID, or a CSS selector.
+          el: '#container',
+
+          // We could pass in a string, but for the sake of convenience
+          // we're passing the ID of the <script> tag above.
+          template: '#sources',
+
+          // Here, we're passing in some initial data
+          data: { sources: 'asdasda' }
+        });
+        ractive.set('sources', 'Bonjour');
+    </script>
+</body>
+</html>

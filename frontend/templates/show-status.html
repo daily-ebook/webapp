@@ -1,0 +1,15 @@
+(% extends "layout/base.html" %)
+(% set title="Generation status" %)
+
+(% block content %)
+<h1>Generation status</h1>
+<div id="ractive-show-status"></div>
+(% endblock %)
+
+(% block scripts %)
+    (% include "ractive/show-status.html" %)
+    <script>
+        var taskId = "(( task_id ))";
+    </script>
+    <script src="(( url_for('frontend.static', filename='js/show-status.js') ))"></script>
+(% endblock %)

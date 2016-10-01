@@ -1,0 +1,63 @@
+<script id='template-create-recipe' type='text/ractive'>
+    <div class="form-group">
+        <label for="recipe-title">E-book title</label>
+        <input type="text" class="form-control"  placeholder="Daily e-book" value="{{ recipe.title }}" />
+        <small class="form-text text-muted">You can use <a href="">special variables!</a></small>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                {{ #each recipe.sources:index }}
+                    <div href="#" class="list-group-item {{ index==activeIndex ? 'active' : '' }} text-truncate"  on-focus="selectSourceToEdit:{{ index }}" on-click="selectSourceToEdit:{{ index }}" tabindex="{{ index+1 }}">
+                       <small>{{ index+1 }}.</small> {{ display_name }} <small>{{ config[display_option] }}</small>
+                    </div>
+                {{ /each }}
+            </ul>
+            <br>
+            <div class="form-group">
+                <select class="custom-select" value="{{ sourceToAdd }}">
+                    {{ #each availableSources.sources }}
+                        <option value="{{ name }}">{{ display_name }}</option>
+                    {{ /each }}
+                </select>
+                <button class="btn btn-primary" on-click="addSourceToRecipe">Add</button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            {{ #recipe.sources[activeIndex] }}
+                <div class="card card-block">
+                    <h4 class="card-title">{{ display_name }}</h4>
+                    <p class="card-text">{{ description }}</p>
+                    <div class="row">
+                        {{ #each allowed_options }}
+                            <div class="form-group col-md-6">
+                                {{ #if type==="select" }}
+                                    <label>{{ display_name }}</label>
+                                    <select class="form-control" value="{{ ../../config[name] }}" >
+                                        {{ #each options:i }}
+                                            <option value="{{ value }}" {{ i===0 ? "selected" : "" }} >{{ display_value }}</option>
+                                        {{ /each }}
+                                    </select>
+                                    <small class="form-text text-muted">{{ description }}</small>
+                                {{ elseif type==="checkbox" }}
+                                        <label>{{ display_name }}</label>
+                                        <div>
+                                            <input type="checkbox" checked="{{ ../../config[name] }}">
+                                            <small class="text-muted">{{ description }}</small>
+                                        </div>
+                                {{ else }}
+                                    <label>{{ display_name }}</label>
+                                    <input class="form-control" type="{{ type }}" value="{{ ../../config[name] }}" {{ required ? 'required' : '' }} >
+                                    <small clasS="form-text text-muted">{{ description }}</small>
+                                {{ /if }}
+                            </div>
+                        {{ /each}}
+                    </div>
+                </div>
+            {{ /recipe.sources[activeIndex] }}
+        </div>
+    </div>
+    <div class="text-md-right">
+        <button class="btn btn-success" on-click="submitGenerateRequest">Generate</button>
+    </div>
+</script>

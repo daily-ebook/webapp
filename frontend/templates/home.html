@@ -1,0 +1,11 @@
+(% extends "layout/base.html" %)
+
+(% block content %)
+<form method="POST" action="(( url_for('api.generate') ))">
+    <div class="form-group">
+        <label for="recipe">JSON Recipe</label>
+        <textarea class="form-control" id="recipe" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Generate e-book</button>
+</form>
+(% endblock %)
