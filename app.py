@@ -41,4 +41,4 @@ if __name__ == "__main__":
     app.register_blueprint(frontend)
     app.register_blueprint(api, url_prefix='/api/v1')
 
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
