@@ -24,7 +24,7 @@ def hello():
 def generate():
     recipe_txt = request.form.get("recipe")
     recipe = json.loads(recipe_txt)
-    recipe = utils.clean_recipe(recipe)
+    #recipe = utils.clean_recipe(recipe)
     task = celery.send_task('tasks.generate_book_from_recipe', args=[recipe], kwargs={})
     return jsonify(task.id)
 
