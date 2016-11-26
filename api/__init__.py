@@ -1,1 +1,1 @@
-from .views import api
+from .routes import api

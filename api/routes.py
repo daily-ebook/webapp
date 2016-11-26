@@ -11,23 +11,11 @@ import utils
 
 api = Blueprint('api', __name__)
 
-@api.route("/hello-sync")
-def hello_sync():
-    task = celery.send_task('tasks.print_hello')
-    response = task.get()
-    return jsonify(response)
-
-@api.route("/hello")
-def hello():
-    task = celery.send_task('tasks.print_hello')
-    return task.id
-
 @api.route("/generate", methods=['POST'])
 def generate():
-    recipe_txt = request.form.get("recipe")
-    recipe = json.loads(recipe_txt)
-    #recipe = utils.clean_recipe(recipe)
-    task = celery.send_task('tasks.generate_book_from_recipe', args=[recipe], kwargs={})
+    recipe_json = request.form.get("recipe")
+    recipe_dict = json.loads(recipe_json)
+    task = celery.send_task('data_provider.generate_book_from_dict_recipe', args=[recipe_dict], kwargs={})
     return jsonify(task.id)
 
 @api.route('/status/<task_id>')
@@ -38,7 +26,7 @@ def status(task_id):
 
 @api.route('/sources')
 def sources():
-    task = celery.send_task('tasks.get_sources_metadata')
+    task = celery.send_task('data_provider.get_sources_metadata', args=[], kwargs={})
     response = task.get()
     return jsonify(response)
 

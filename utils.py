@@ -5,17 +5,19 @@ def generate_response_from_task(task):
     if task.state == 'PENDING':
         response = {
             'state': task.state,
-            'status': 'Pending...'
+            'info': {
+                'message': 'Pending...'
+            }
         }
     elif task.state != 'FAILURE':
         response = {
             'state': task.state,
-            'status': task.info.get('status', '')
+            'info': task.info
         }
     else: # something went wrong in the background job
         response = {
             'state': task.state,
-            'status': str(task.info),    # this is the exception raised
+            'info': task.info    # this is the exception raised
         }
     return response
 
