@@ -1,12 +1,10 @@
 # flask stuff
 from flask import Flask
 
-
 # my blueprints
 from api import api
 from frontend import frontend
-
-from scheduler import celery
+from upload_service import upload_service
 
 class CustomFlask(Flask):
     jinja_options = Flask.jinja_options.copy()
@@ -19,6 +17,7 @@ class CustomFlask(Flask):
         comment_end_string='#)',
     ))
 
+# from scheduler import celery
 """
 from celerybeatmongo.models import PeriodicTask
 @app.route('/enqueue')
@@ -40,5 +39,6 @@ if __name__ == "__main__":
 
     app.register_blueprint(frontend)
     app.register_blueprint(api, url_prefix='/api/v1')
+    app.register_blueprint(upload_service, url_prefix='/upload_service')
 
     app.run(host='0.0.0.0', debug=True)
