@@ -3,7 +3,7 @@ MAINTAINER crisbal cristian@baldi.me
 
 WORKDIR /webapp
 
-ADD requirements.txt . 
+ADD requirements.txt .
 RUN pip install -r requirements.txt
 
 ADD . .
