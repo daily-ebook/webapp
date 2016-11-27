@@ -1,6 +1,15 @@
 <script id='template-show-status' type='text/ractive'>
 <div class="text-xs-center">
     <h2>{{ status.state }}</h2>
-    <h3>{{ status.status }}</h3>
+    <h3>{{ status.info.message }}</h3>
+    {{ #if status.info.url }}
+        <a href="{{ status.info.url }}">Download ebook</a>
+    {{ /if }}
 </div>
+{{ #if previewHtml }}
+    <h2>Preview Content</h2>
+    <div class="card card-block">
+        {{{ previewHtml }}}
+    </div>
+{{ /if }}
 </script>
